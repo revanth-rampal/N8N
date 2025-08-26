@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="n8n.jpg" alt="n8n Logo" width="400">
+  <img src="assets/img/n8n.jpg" alt="n8n Logo" width="400">
 </p>
 
 # My n8n Learning Journey 🚀
