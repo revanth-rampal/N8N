@@ -1,0 +1,261 @@
+{
+  "name": "FormMail",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1bd1cT9YJ6vNqZLeD8kOTz6708BtqsOmCQDzMUMUYgTw",
+          "mode": "list",
+          "cachedResultName": "Contact Information (Responses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1bd1cT9YJ6vNqZLeD8kOTz6708BtqsOmCQDzMUMUYgTw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1195159873,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1bd1cT9YJ6vNqZLeD8kOTz6708BtqsOmCQDzMUMUYgTw/edit#gid=1195159873"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a7fa91ee-a5db-49a7-96b8-ee4d3859f949",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "kgjDy9MDTNbL2cQp",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "classroom100689792819379369194@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "revanth a"
+        },
+        "timeMin": "=",
+        "timeMax": "=",
+        "options": {
+          "query": "N8N Automation Workshop"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "e955273b-9361-45e2-9e18-b098a58cea4d",
+      "name": "Get many events",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "wR7YPlc4hHjSKXRn",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Google Sheets Trigger').item.json.Email }}",
+        "subject": "Registered successfully for the Workshop",
+        "message": "=<!-- Clean Header -->\n<div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; border: 1px solid #e5e7eb;\">\n    <div class=\"header\" style=\"background-color: #4A5568; padding: 20px; text-align: center;\">\n        <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Event Registration Confirmed</h1>\n    </div>\n\n    <!-- Email Content -->\n    <div class=\"content\" style=\"padding: 24px 32px; font-size: 16px; line-height: 1.6;\">\n        <p>Hi {{ $('Google Sheets Trigger').item.json[\"First Name\"] }},</p>\n        \n        <p><b>Welcome to the Fam!!</b></p>\n        \n        <p>Thank you for registering for the event! Your calendar invitation is attached to this email. Please accept it to add the event to your calendar.</p>\n        \n        <p>Seyaa!!!</p>\n        \n        <hr style=\"border: none; border-top: 1px solid #e5e7eb; margin: 24px 0;\">\n        \n        <!-- Event Details -->\n        <div class=\"details\">\n             <p><b>Date:</b> {{ new Date($('Get many events').item.json.start.dateTime).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }}</p>\n             <p><b>Time:</b> {{ new Date($('Get many events').item.json.start.dateTime).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' }) }}</p>\n             <p><b>Link:</b></p>\n             \n             <!-- Button styled link -->\n             <a href=\"{{ $('Get many events').item.json.hangoutLink }}\" style=\"background-color: #2563eb; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: 500; margin-top: 8px;\">Join Google Meet</a>\n        </div>\n    </div>\n</div>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        640,
+        0
+      ],
+      "id": "beb9da0c-b396-48d9-8e7c-ad8e25c852c6",
+      "name": "Send a message",
+      "webhookId": "a1d55565-98be-46ca-babe-96fbd4c2b0c1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "3sT8kUL57ktOfzHG",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "iCal",
+        "title": "={{ $('Get many events').item.json.summary }}",
+        "start": "={{ $('Get many events').item.json.start.dateTime }}",
+        "end": "={{ $('Get many events').item.json.end.dateTime }}",
+        "allDay": true,
+        "additionalFields": {
+          "description": "={{ $('Get many events').item.json.hangoutLink }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        416,
+        0
+      ],
+      "id": "30cb0b88-50a4-4eb4-b9de-559a42f8ad7d",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1bd1cT9YJ6vNqZLeD8kOTz6708BtqsOmCQDzMUMUYgTw",
+          "mode": "list",
+          "cachedResultName": "N8N",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1bd1cT9YJ6vNqZLeD8kOTz6708BtqsOmCQDzMUMUYgTw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 600695966,
+          "mode": "list",
+          "cachedResultName": "Email Status",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1bd1cT9YJ6vNqZLeD8kOTz6708BtqsOmCQDzMUMUYgTw/edit#gid=600695966"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "emai": "={{ $('Google Sheets Trigger').item.json.Email }}",
+            "timestamp": "={{ $now }} ",
+            "status": "={{ $json.labelIds[0] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "emai",
+              "displayName": "emai",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        848,
+        0
+      ],
+      "id": "f25a0139-dc34-4e48-bfcc-62ecd1969123",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "5zXqZVUXm8HYuYvr",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get many events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many events": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ba977d6d-d103-4cdb-a0f5-48b8d8e3af67",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "829c84efd6a1acde35cad3cfe1982ace0fb406d65cac2d56031c74d97bd2f499"
+  },
+  "id": "PdY4vq4jNF3uAIo0",
+  "tags": []
+}
