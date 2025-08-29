@@ -1,0 +1,208 @@
+{
+  "name": "The Daily News Digest Bot",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -464,
+        -80
+      ],
+      "id": "3b19db11-57e3-4dd4-8abe-372de793e32e",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "chatId": "1137601967",
+        "text": "=title: {{ $json.title }}\n\nnews:{{ $json.content }}\n\n\nlink: {{ $json.link }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        432,
+        -32
+      ],
+      "id": "510b9181-81e0-4dee-8067-2cbe50610de8",
+      "name": "Send a text message",
+      "webhookId": "1cab3462-dfa5-4171-aafd-199c6dc2b1a0",
+      "credentials": {
+        "telegramApi": {
+          "id": "KbhXyO4cqCl6k99i",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://techcrunch.com/feed/",
+        "options": {
+          "customFields": ""
+        }
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        16,
+        -32
+      ],
+      "id": "8be6501a-b723-455c-96ec-26e5ed3c5e06",
+      "name": "RSS Read"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -512,
+        80
+      ],
+      "id": "7387e073-5165-441f-b817-f4ddb8bf54d0",
+      "name": "Telegram Trigger",
+      "webhookId": "2bc22b71-f87e-4411-8b54-6414be3f2795",
+      "credentials": {
+        "telegramApi": {
+          "id": "KbhXyO4cqCl6k99i",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "18aede06-e198-4d82-bcb6-00d7986e8cf7",
+              "leftValue": "={{ $json.message.text }}",
+              "rightValue": "news",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -368,
+        64
+      ],
+      "id": "e6dfd919-ccfd-45f8-877b-5d3b36c9fcef",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -128,
+        -32
+      ],
+      "id": "64b22cb3-6a69-4ae6-a958-07d4d072aae3",
+      "name": "Merge1",
+      "alwaysOutputData": true
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Kolkata",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": -1
+  },
+  "versionId": "8d6371c6-941c-44fd-9c18-d241a19dab05",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "829c84efd6a1acde35cad3cfe1982ace0fb406d65cac2d56031c74d97bd2f499"
+  },
+  "id": "1dCCoz7sI5BoAbBV",
+  "tags": []
+}
