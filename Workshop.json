@@ -1,0 +1,754 @@
+{
+  "name": "Workshop workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const generateID = () => {\n  let id = '';\n  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';\n  const numbers = '0123456789';\n\n  // xxxx (4 random alphabets)\n  for (let i = 0; i < 4; i++) {\n    id += characters.charAt(Math.floor(Math.random() * characters.length));\n  }\n\n  // 11 (2 random numbers)\n  id += numbers.charAt(Math.floor(Math.random() * numbers.length));\n  id += numbers.charAt(Math.floor(Math.random() * numbers.length));\n\n  // x (1 random alphabet)\n  id += characters.charAt(Math.floor(Math.random() * characters.length));\n\n  // 1 (1 random number)\n  id += numbers.charAt(Math.floor(Math.random() * numbers.length));\n\n  return id;\n};\n\n// Get the input data from the previous node\nconst inputData = $input.first().json;\n\n// Create a new output object with the original data and the new ID\nconst outputData = {\n  ...inputData,\n  ID: generateID()\n};\n\nreturn [\n  {\n    json: outputData\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        -576
+      ],
+      "id": "e310aeee-33c0-4a5c-9aa6-f43029741ee2",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1huzGE1Q2jjblCSAlPqtKZ7KT3vKYe_0OR4-1VTw1dHQ",
+          "mode": "list",
+          "cachedResultName": "Klasswork Workshop  (Responses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1huzGE1Q2jjblCSAlPqtKZ7KT3vKYe_0OR4-1VTw1dHQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1146637135,
+          "mode": "list",
+          "cachedResultName": "Studetns",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1huzGE1Q2jjblCSAlPqtKZ7KT3vKYe_0OR4-1VTw1dHQ/edit#gid=1146637135"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "ID"
+          ],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Last Name ",
+              "displayName": "Last Name ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Phone number",
+              "displayName": "Phone number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        704,
+        -576
+      ],
+      "id": "e4dd3e2d-f9ae-4dd0-98a9-dcbb27ef7c76",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "kcJJ8HpBziljtY7a",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1huzGE1Q2jjblCSAlPqtKZ7KT3vKYe_0OR4-1VTw1dHQ",
+          "mode": "list",
+          "cachedResultName": "Klasswork Workshop  (Responses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1huzGE1Q2jjblCSAlPqtKZ7KT3vKYe_0OR4-1VTw1dHQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 638114997,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1huzGE1Q2jjblCSAlPqtKZ7KT3vKYe_0OR4-1VTw1dHQ/edit#gid=638114997"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        288,
+        -576
+      ],
+      "id": "6b3db502-24a0-4da5-a980-c5ec76e946d3",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "kcJJ8HpBziljtY7a",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -336,
+        -352
+      ],
+      "id": "50e1bbec-15c9-4687-b953-f791c7d9620b",
+      "name": "Telegram Trigger",
+      "webhookId": "04333015-7790-49fd-aaab-50f53ea98052",
+      "credentials": {
+        "telegramApi": {
+          "id": "SnACXmtws71H12wX",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "=Send-workshop",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "9019d2e7-28a5-4dc9-ae78-30087e1b6150"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ef77c0b2-7757-4edb-a56e-5a5162603420",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "send-resources",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e9482f3c-01f1-4b5e-8c5a-ce4efefb7424",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "send-feedback",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7c412ee0-23a7-4634-9830-9ccae5276403",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "send-certificates",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        16,
+        -336
+      ],
+      "id": "bb91c4c0-ff42-44e4-b509-334f2f803ac9",
+      "name": "Switch",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "=Workshop Booking Confirmation",
+        "message": "=<!DOCTYPE html> <html lang=\"en\"> <head>     <meta charset=\"UTF-8\">     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">     <title>N8N Workshop Confirmation</title>     <style>         /* Basic Reset */         body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }         table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }         img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }         table { border-collapse: collapse !important; }         body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #f7f8fa; }                  /* Font Import */         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');          /* Main Styles */         body {             font-family: 'Inter', 'Arial', sans-serif;             color: #333333;         }          .container {             width: 100%;             max-width: 600px;             margin: 0 auto;             background-color: #ffffff;             border-radius: 12px;             overflow: hidden;             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);         }          .header {             background: linear-gradient(to right, #2c1a5b, #1A0A3F);             padding: 30px 20px;             text-align: center;             color: #ffffff;         }                  .header h1 {             margin: 0;             font-size: 26px;             font-weight: 700;         }          .content {             padding: 30px;         }                  .confirmation-box {             border: 1px solid #e0e0e0;             border-radius: 8px;             overflow: hidden;         }          .details-section {             padding: 25px;         }          .details-section h2 {             font-size: 18px;             font-weight: 600;             color: #1A0A3F;             margin-top: 0;             margin-bottom: 20px;             border-bottom: 1px solid #e0e0e0;             padding-bottom: 10px;         }                  .detail-item {             font-size: 15px;             margin-bottom: 12px;             line-height: 1.6;             display: flex;         }                  .detail-item strong {             color: #555;             width: 110px;             min-width: 110px;             display: inline-block;         }                  .map-link {             color: #6a11cb;             text-decoration: none;             font-weight: 600;         }          .ticket-highlight {             background-color: #f7f8fa;             padding: 25px;             text-align: center;             border-left: 2px dashed #d0d0d0;         }          .date-box {             background-color: #fff;             border: 1px solid #e0e0e0;             border-radius: 8px;             padding: 15px;             display: inline-block;             margin-bottom: 15px;             width: 70px;         }                  .date-day {             font-size: 36px;             font-weight: 700;             color: #1A0A3F;             line-height: 1;         }                  .date-month {             font-size: 14px;             text-transform: uppercase;             color: #666;             font-weight: 600;         }          .booking-id {             font-size: 14px;             color: #555;             font-weight: 600;             background-color: #e9e5f3;             padding: 8px 12px;             border-radius: 20px;             display: inline-block;         }                  .info-section {             padding: 25px 0 10px 0;         }                  .info-section h2 {             font-size: 18px;             font-weight: 600;             color: #1A0A3F;             margin-top: 0;         }                  .info-section ul {             padding-left: 20px;             margin: 0;             font-size: 15px;             color: #555;         }                  .button-container {             text-align: center;             padding: 20px 0 10px 0;         }          .button {             background-color: #6a11cb;             color: #ffffff;             padding: 15px 30px;             text-decoration: none;             border-radius: 8px;             font-weight: 600;             font-size: 16px;             display: inline-flex;             align-items: center;         }          .footer {             padding: 30px 20px;             text-align: center;             font-size: 12px;             color: #999999;         }      </style> </head> <body style=\"margin: 0 !important; padding: 0 !important; background-color: #f7f8fa;\">     <!-- Preheader Text -->     <div style=\"display: none; font-size: 1px; color: #f7f8fa; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;\">         Your booking for the N8N Workshop is confirmed!     </div>      <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">         <tr>             <td align=\"center\" style=\"padding: 20px;\">                 <div class=\"container\">                     <!-- Header -->                     <div class=\"header\">                          <h1>Booking Confirmation</h1>                     </div>                      <!-- Main Content -->                     <div class=\"content\">                         <p style=\"font-size: 16px; margin-bottom: 25px; text-align: center;\">Hello <strong>{{ $json['First Name'] }}</strong>, your seat is confirmed!</p>                          <table class=\"confirmation-box\" width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">                             <tr>                                 <td class=\"details-section\" width=\"65%\" valign=\"top\">                                     <h2>Event Details</h2>                                     <div class=\"detail-item\"><strong>Workshop:</strong><span>N8N Automation</span></div>                                     <div class=\"detail-item\"><strong>Date:</strong><span>September 15, 2025</span></div>                                     <div class=\"detail-item\"><strong>Time:</strong><span>10:00 AM - 4:00 PM</span></div>                                     <div class=\"detail-item\"><strong>Venue:</strong><span>RIETS, Rajamundry</span></div>                                                                          <h2 style=\"margin-top: 30px;\">Participant Details</h2>                                     <div class=\"detail-item\"><strong>Name:</strong><span>{{ $json['First Name'] }} {{ $json['Last Name '] }} </span></div>                                     <div class=\"detail-item\"><strong>Email:</strong><span>{{ $json.Email }}</span></div>                                     <div class=\"detail-item\"><strong>Event ID:</strong><span>{{ $json.ID }}</span></div>                                 </td>                                 <td class=\"ticket-highlight\" width=\"35%\" valign=\"top\">                                     <div class=\"date-box\">                                         <div class=\"date-day\">15</div>                                         <div class=\"date-month\">Sep</div>                                     </div>                                     <div class=\"booking-id\">#KWN8N-2025</div>                                 </td>                             </tr>                         </table>                                                  <div class=\"info-section\">                             <h2>Important Information</h2>                             <ul>                                 <li>Please arrive 15 minutes early for check-in.</li>                                 <li>Laptops are required for the hands-on sessions.</li>                             </ul>                         </div>                          <!-- Contact Info -->                         <div style=\"text-align: center; padding: 20px 0 10px 0; font-size: 14px; color: #555;\">                             For any questions, you can contact us at <a href=\"mailto:klasswork.ind@gmail.com\" style=\"color: #6a11cb; text-decoration: none; font-weight: 600;\">klasswork.ind@gmail.com</a>.                         </div>                     </div>                      <!-- Footer -->                     <div class=\"footer\">                         <p>This email was sent by Klasswork to confirm your workshop registration.</p>                         <p>&copy; 2024 Klasswork. All rights reserved.</p>                     </div>                 </div>             </td>         </tr>     </table> </body> </html>\n\n \n\n\n\n",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        912,
+        -576
+      ],
+      "id": "90940000-65ab-4cda-b832-3aeaac62deb9",
+      "name": "Workshop Confirmation",
+      "webhookId": "9082b94e-b9b5-46ff-ab37-29a18023d237",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "pHUz8a9vR6Lf2o3P",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1huzGE1Q2jjblCSAlPqtKZ7KT3vKYe_0OR4-1VTw1dHQ",
+          "mode": "list",
+          "cachedResultName": "Klasswork Workshop  (Responses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1huzGE1Q2jjblCSAlPqtKZ7KT3vKYe_0OR4-1VTw1dHQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1146637135,
+          "mode": "list",
+          "cachedResultName": "Studetns",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1huzGE1Q2jjblCSAlPqtKZ7KT3vKYe_0OR4-1VTw1dHQ/edit#gid=1146637135"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        464,
+        -384
+      ],
+      "id": "c4a04c41-7aa9-411b-80ea-3d7b533af3b8",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "kcJJ8HpBziljtY7a",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1huzGE1Q2jjblCSAlPqtKZ7KT3vKYe_0OR4-1VTw1dHQ",
+          "mode": "list",
+          "cachedResultName": "Klasswork Workshop  (Responses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1huzGE1Q2jjblCSAlPqtKZ7KT3vKYe_0OR4-1VTw1dHQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1146637135,
+          "mode": "list",
+          "cachedResultName": "Studetns",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1huzGE1Q2jjblCSAlPqtKZ7KT3vKYe_0OR4-1VTw1dHQ/edit#gid=1146637135"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        512,
+        -176
+      ],
+      "id": "cd980ce3-b933-4bcb-a9d7-19a0f98deaa6",
+      "name": "Get row(s) in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "kcJJ8HpBziljtY7a",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1huzGE1Q2jjblCSAlPqtKZ7KT3vKYe_0OR4-1VTw1dHQ",
+          "mode": "list",
+          "cachedResultName": "Klasswork Workshop  (Responses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1huzGE1Q2jjblCSAlPqtKZ7KT3vKYe_0OR4-1VTw1dHQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1146637135,
+          "mode": "list",
+          "cachedResultName": "Studetns",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1huzGE1Q2jjblCSAlPqtKZ7KT3vKYe_0OR4-1VTw1dHQ/edit#gid=1146637135"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        368,
+        0
+      ],
+      "id": "df073522-a6c1-4164-8280-bad0be675b27",
+      "name": "Get row(s) in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "kcJJ8HpBziljtY7a",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "1137601967",
+        "text": "Sent Workshop Confirmation",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1120,
+        -576
+      ],
+      "id": "05682abc-004a-4f2d-b780-4b541e1b01cb",
+      "name": "Send a text message",
+      "webhookId": "31635dd4-b30a-4451-bd2f-908723f3b7ad",
+      "credentials": {
+        "telegramApi": {
+          "id": "SnACXmtws71H12wX",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "1137601967",
+        "text": "Sent Workshop Resources",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        912,
+        -384
+      ],
+      "id": "b6178344-7354-4b2d-9a00-502892d81155",
+      "name": "Send a text message1",
+      "webhookId": "31635dd4-b30a-4451-bd2f-908723f3b7ad",
+      "credentials": {
+        "telegramApi": {
+          "id": "SnACXmtws71H12wX",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "Workshop Resources",
+        "message": "=<!DOCTYPE html> <html lang=\"en\"> <head>     <meta charset=\"UTF-8\">     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">     <title>N8N Workshop Resources</title>     <style>         /* Basic Reset */         body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }         table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }         img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }         table { border-collapse: collapse !important; }         body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #f7f8fa; }                  /* Font Import */         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');          /* Main Styles */         body {             font-family: 'Inter', 'Arial', sans-serif;             color: #333333;         }          .container {             width: 100%;             max-width: 600px;             margin: 0 auto;             background-color: #ffffff;             border-radius: 12px;             overflow: hidden;             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);         }          .header {             background: linear-gradient(to right, #2c1a5b, #1A0A3F);             padding: 30px 20px;             text-align: center;             color: #ffffff;         }                  .header h1 {             margin: 0;             font-size: 26px;             font-weight: 700;         }          .content {             padding: 30px;             text-align: center;         }                  .content p {             font-size: 16px;             line-height: 1.6;             color: #555;             margin-bottom: 25px;         }                  .resource-box {             border: 1px solid #e0e0e0;             border-radius: 8px;             padding: 25px;             text-align: left;             margin-bottom: 30px;         }          .resource-box h2 {             font-size: 18px;             font-weight: 600;             color: #1A0A3F;             margin-top: 0;             margin-bottom: 20px;         }                  .resource-list li {             font-size: 15px;             margin-bottom: 12px;             color: #333;             list-style-type: none;             display: flex;             align-items: center;         }          .resource-list {             padding-left: 0;         }                  .icon {             margin-right: 12px;         }                  .button-container {             text-align: center;             padding: 10px 0;         }          .button {             background-color: #6a11cb;             color: #ffffff;             padding: 15px 30px;             text-decoration: none;             border-radius: 8px;             font-weight: 600;             font-size: 16px;             display: inline-block;         }                  .feedback-section {             padding-top: 20px;             border-top: 1px solid #e0e0e0;             margin-top: 30px;         }          .footer {             padding: 30px 20px;             text-align: center;             font-size: 12px;             color: #999999;         }      </style> </head> <body style=\"margin: 0 !important; padding: 0 !important; background-color: #f7f8fa;\">     <!-- Preheader Text -->     <div style=\"display: none; font-size: 1px; color: #f7f8fa; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;\">         Live resources for your N8N Workshop session!     </div>      <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">         <tr>             <td align=\"center\" style=\"padding: 20px;\">                 <div class=\"container\">                     <!-- Header -->                     <div class=\"header\">                          <h1>Workshop Resources</h1>                     </div>                      <!-- Main Content -->                     <div class=\"content\">                         <p>Hello <strong>{{ $json['First Name'] }}</strong>,<br>Here are the live resources for our ongoing N8N Automation workshop. You can use these materials to follow along with the session.</p>                          <div class=\"resource-box\">                             <h2>Here's what's included:</h2>                             <ul class=\"resource-list\">                                 <li>                                     <svg class=\"icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#6a11cb\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"></path><polyline points=\"14 2 14 8 20 8\"></polyline><line x1=\"16\" y1=\"13\" x2=\"8\" y2=\"13\"></line><line x1=\"16\" y1=\"17\" x2=\"8\" y2=\"17\"></line><polyline points=\"10 9 9 9 8 9\"></polyline></svg>                                     <span>Presentation Slides (.pdf)</span>                                 </li>                                 <li>                                     <svg class=\"icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#6a11cb\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"16 18 22 12 16 6\"></polyline><polyline points=\"8 6 2 12 8 18\"></polyline></svg>                                     <span>Code Snippets & Workflows</span>                                 </li>                                 <li>                                     <svg class=\"icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#6a11cb\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72\"></path><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72\"></path></svg>                                     <span>Helpful Links & Further Reading</span>                                 </li>                             </ul>                         </div>                          <!-- CTA Button -->                         <div class=\"button-container\">                             <a href=\"[YOUR_RESOURCE_LINK_HERE]\" target=\"_blank\" class=\"button\">Access All Resources</a>                         </div>                                                   <div style=\"text-align: center; padding: 20px 0 0 0; font-size: 14px; color: #555;\">                             For any questions, contact us at <a href=\"mailto:klasswork.ind@gmail.com\" style=\"color: #6a11cb; text-decoration: none; font-weight: 600;\">klasswork.ind@gmail.com</a>.                         </div>                     </div>                      <!-- Footer -->                     <div class=\"footer\">                         <p>This email was sent by Klasswork.</p>                         <p>&copy; 2024 Klasswork. All rights reserved.</p>                     </div>                 </div>             </td>         </tr>     </table> </body> </html>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        672,
+        -384
+      ],
+      "id": "d898b0f2-0ff0-4fc6-9048-c619c7cf63e4",
+      "name": "Send  Workshop Resources",
+      "webhookId": "acf75c84-0976-482b-b712-a905aee25745",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "pHUz8a9vR6Lf2o3P",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "1137601967",
+        "text": "Sent Feedback Form",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        880,
+        -192
+      ],
+      "id": "e94b7083-164d-433e-a1a8-5c84ab7badc7",
+      "name": "Send a text message2",
+      "webhookId": "31635dd4-b30a-4451-bd2f-908723f3b7ad",
+      "credentials": {
+        "telegramApi": {
+          "id": "SnACXmtws71H12wX",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "Workshop Feedback",
+        "message": "=<!DOCTYPE html> <html lang=\"en\"> <head>     <meta charset=\"UTF-8\">     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">     <title>N8N Workshop Resources</title>     <style>         /* Basic Reset */         body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }         table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }         img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }         table { border-collapse: collapse !important; }         body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #f7f8fa; }                  /* Font Import */         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');          /* Main Styles */         body {             font-family: 'Inter', 'Arial', sans-serif;             color: #333333;         }          .container {             width: 100%;             max-width: 600px;             margin: 0 auto;             background-color: #ffffff;             border-radius: 12px;             overflow: hidden;             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);         }          .header {             background: linear-gradient(to right, #2c1a5b, #1A0A3F);             padding: 30px 20px;             text-align: center;             color: #ffffff;         }                  .header h1 {             margin: 0;             font-size: 26px;             font-weight: 700;         }          .content {             padding: 30px;             text-align: center;         }                  .content p {             font-size: 16px;             line-height: 1.6;             color: #555;             margin-bottom: 25px;         }                  .resource-box {             border: 1px solid #e0e0e0;             border-radius: 8px;             padding: 25px;             text-align: left;             margin-bottom: 30px;         }          .resource-box h2 {             font-size: 18px;             font-weight: 600;             color: #1A0A3F;             margin-top: 0;             margin-bottom: 20px;         }                  .resource-list li {             font-size: 15px;             margin-bottom: 12px;             color: #333;             list-style-type: none;             display: flex;             align-items: center;         }          .resource-list {             padding-left: 0;         }                  .icon {             margin-right: 12px;         }                  .button-container {             text-align: center;             padding: 10px 0;         }          .button {             background-color: #6a11cb;             color: #ffffff;             padding: 15px 30px;             text-decoration: none;             border-radius: 8px;             font-weight: 600;             font-size: 16px;             display: inline-block;         }                  .feedback-section {             padding-top: 20px;             border-top: 1px solid #e0e0e0;             margin-top: 30px;         }          .footer {             padding: 30px 20px;             text-align: center;             font-size: 12px;             color: #999999;         }      </style> </head> <body style=\"margin: 0 !important; padding: 0 !important; background-color: #f7f8fa;\">     <!-- Preheader Text -->     <div style=\"display: none; font-size: 1px; color: #f7f8fa; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;\">         Live resources for your N8N Workshop session!     </div>      <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">         <tr>             <td align=\"center\" style=\"padding: 20px;\">                 <div class=\"container\">                     <!-- Header -->                     <div class=\"header\">                          <h1>Workshop Resources</h1>                     </div>                      <!-- Main Content -->                     <div class=\"content\">                         <p>Hello <strong>{{ $json['First Name'] }}</strong>,<br>Here are the live resources for our ongoing N8N Automation workshop. You can use these materials to follow along with the session.</p>                          <div class=\"resource-box\">                             <h2>Here's what's included:</h2>                             <ul class=\"resource-list\">                                 <li>                                     <svg class=\"icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#6a11cb\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"></path><polyline points=\"14 2 14 8 20 8\"></polyline><line x1=\"16\" y1=\"13\" x2=\"8\" y2=\"13\"></line><line x1=\"16\" y1=\"17\" x2=\"8\" y2=\"17\"></line><polyline points=\"10 9 9 9 8 9\"></polyline></svg>                                     <span>Presentation Slides (.pdf)</span>                                 </li>                                 <li>                                     <svg class=\"icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#6a11cb\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"16 18 22 12 16 6\"></polyline><polyline points=\"8 6 2 12 8 18\"></polyline></svg>                                     <span>Code Snippets & Workflows</span>                                 </li>                                 <li>                                     <svg class=\"icon\" xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#6a11cb\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72\"></path><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72\"></path></svg>                                     <span>Helpful Links & Further Reading</span>                                 </li>                             </ul>                         </div>                          <!-- CTA Button -->                         <div class=\"button-container\">                             \n<a href=\"https://docs.google.com/forms/d/e/1FAIpQLSdzTPQ8v4jHA7sj0k5XCj80R1chxvEinTrUoOReQVP3M8eGhw/viewform?usp=dialog\" target=\"_blank\" class=\"button\">Access All Resources</a>\n</div>                                                   <div style=\"text-align: center; padding: 20px 0 0 0; font-size: 14px; color: #555;\">                             For any questions, contact us at <a href=\"mailto:klasswork.ind@gmail.com\" style=\"color: #6a11cb; text-decoration: none; font-weight: 600;\">klasswork.ind@gmail.com</a>.                         </div>                     </div>                      <!-- Footer -->                     <div class=\"footer\">                         <p>This email was sent by Klasswork.</p>                         <p>&copy; 2024 Klasswork. All rights reserved.</p>                     </div>                 </div>             </td>         </tr>     </table> </body> </html>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        672,
+        -176
+      ],
+      "id": "02147914-e229-470f-bd9e-4e060db03ff0",
+      "name": "Send Feedback",
+      "webhookId": "acf75c84-0976-482b-b712-a905aee25745",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "pHUz8a9vR6Lf2o3P",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "1137601967",
+        "text": "Sent Certificate",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        784,
+        32
+      ],
+      "id": "9ecb27eb-3858-44dd-832c-30e1d3055a44",
+      "name": "Send a text message3",
+      "webhookId": "31635dd4-b30a-4451-bd2f-908723f3b7ad",
+      "credentials": {
+        "telegramApi": {
+          "id": "SnACXmtws71H12wX",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "Workshop Certificates",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Your N8N Workshop Certificate</title>\n    <style>\n        /* Basic Reset */\n        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }\n        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }\n        img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }\n        table { border-collapse: collapse !important; }\n        body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #f7f8fa; }\n        \n        /* Font Import */\n        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');\n\n        /* Main Styles */\n        body {\n            font-family: 'Poppins', 'Arial', sans-serif;\n            color: #333333;\n        }\n\n        .container {\n            width: 100%;\n            max-width: 600px;\n            margin: 0 auto;\n            background-color: #ffffff;\n            border-radius: 12px;\n            overflow: hidden;\n            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);\n        }\n\n        .header {\n            background: linear-gradient(to right, #1e3a8a, #3b82f6);\n            padding: 40px 20px;\n            text-align: center;\n            color: #ffffff;\n        }\n        \n        .header h1 {\n            margin: 0;\n            font-size: 28px;\n            font-weight: 700;\n        }\n        \n        .header p {\n            margin: 5px 0 0 0;\n            font-size: 16px;\n            opacity: 0.9;\n        }\n\n        .content {\n            padding: 35px;\n            text-align: center;\n        }\n        \n        .content p {\n            font-size: 16px;\n            line-height: 1.6;\n            color: #555;\n            margin-bottom: 25px;\n        }\n\n        .button-container {\n            text-align: center;\n            padding: 10px 0 25px 0;\n        }\n\n        .button {\n            background-color: #2563eb;\n            color: #ffffff;\n            padding: 16px 35px;\n            text-decoration: none;\n            border-radius: 8px;\n            font-weight: 600;\n            font-size: 17px;\n            display: inline-block;\n            transition: background-color 0.3s ease;\n        }\n        \n        .section-divider {\n            border-top: 1px solid #e0e0e0;\n            margin: 30px auto;\n            width: 80%;\n        }\n\n        .share-section p, .feedback-section p {\n            font-size: 15px;\n            color: #555;\n        }\n        \n        .share-section a, .feedback-section a {\n            color: #2563eb;\n            text-decoration: none;\n            font-weight: 600;\n        }\n\n        .footer {\n            padding: 30px 20px;\n            text-align: center;\n            font-size: 12px;\n            color: #999999;\n        }\n\n    </style>\n</head>\n<body style=\"margin: 0 !important; padding: 0 !important; background-color: #f7f8fa;\">\n    <!-- Preheader Text -->\n    <div style=\"display: none; font-size: 1px; color: #f7f8fa; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;\">\n        Congratulations! Your N8N Workshop certificate is ready.\n    </div>\n\n    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n        <tr>\n            <td align=\"center\" style=\"padding: 20px;\">\n                <div class=\"container\">\n                    <!-- Header -->\n                    <div class=\"header\">\n                         <h1>Congratulations!</h1>\n                         <p>Your certificate is ready.</p>\n                    </div>\n\n                    <!-- Main Content -->\n                    <div class=\"content\">\n                        <p>Hello <strong>{{ $json['First Name'] }}</strong>,<br>Congratulations on successfully completing the <strong>N8N Automation Workshop</strong>. We're proud of your achievement!</p>\n\n                        <!-- CTA Button -->\n                        <div class=\"button-container\">\n                            <a href=\"[YOUR_CERTIFICATE_DOWNLOAD_LINK]\" target=\"_blank\" class=\"button\">Download Your Certificate</a>\n                        </div>\n                        \n                        <div class=\"section-divider\"></div>\n\n                        <div class=\"share-section\">\n                             <p>Feel free to share your new credential on LinkedIn or other social platforms. Way to go!</p>\n                        </div>\n\n                        <div class=\"section-divider\"></div>\n\n                        <div class=\"feedback-section\">\n                             <p>Your feedback is important to us. Please take a moment to share your thoughts on the workshop to help us improve.</p>\n                             <a href=\"[YOUR_FEEDBACK_LINK_HERE]\" target=\"_blank\">Share Your Feedback</a>\n                        </div>\n                         \n                        <div style=\"text-align: center; padding: 30px 0 0 0; font-size: 14px; color: #555;\">\n                            For any questions, contact us at <a href=\"mailto:klasswork.ind@gmail.com\" style=\"color: #2563eb; text-decoration: none; font-weight: 600;\">klasswork.ind@gmail.com</a>.\n                        </div>\n                    </div>\n\n                    <!-- Footer -->\n                    <div class=\"footer\">\n                        <p>This email was sent by Klasswork.</p>\n                        <p>&copy; 2024 Klasswork. All rights reserved.</p>\n                    </div>\n                </div>\n            </td>\n        </tr>\n    </table>\n</body>\n</html>\n",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        560,
+        32
+      ],
+      "id": "95a0ed5a-433d-4ed8-a55d-47c0a2c8ee38",
+      "name": "Send Workshop Certificates",
+      "webhookId": "acf75c84-0976-482b-b712-a905aee25745",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "pHUz8a9vR6Lf2o3P",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Workshop Confirmation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get row(s) in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get row(s) in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Send  Workshop Resources",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Send Feedback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet3": {
+      "main": [
+        [
+          {
+            "node": "Send Workshop Certificates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workshop Confirmation": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send  Workshop Resources": {
+      "main": [
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Feedback": {
+      "main": [
+        [
+          {
+            "node": "Send a text message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Workshop Certificates": {
+      "main": [
+        [
+          {
+            "node": "Send a text message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Kolkata",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "7fecb273-8e6b-4932-b64a-46de015b4438",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2667b18e896255f6ac343c6364e981e77dbd1631e8a924b0ff54298f7c785346"
+  },
+  "id": "86OE5vJ7fMnkNT2f",
+  "tags": []
+}
